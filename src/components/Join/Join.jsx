@@ -1,9 +1,19 @@
-import React, { userState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import "./Join.css";
+
 export default function Join() {
-  const [name, setName] = userState("");
-  const [room, setRoom] = userState("");
+  const [values, setValues] = useState({
+    name: "",
+    room: "",
+  });
+
+  const { name, room } = values;
+
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+  };
 
   return (
     <div className="joinOuterContainer">
@@ -14,7 +24,8 @@ export default function Join() {
             className="joinInput"
             type="text"
             placeholder=""
-            onChange={(event) => setName(event.target.value)}
+            onChange={handleChange("name")}
+            value={name}
           />
         </div>
         <div>
@@ -22,7 +33,8 @@ export default function Join() {
             className="joinInput mt-20"
             type="text"
             placeholder=""
-            onChange={(event) => setRoom(event.target.value)}
+            onChange={handleChange("room")}
+            value={room}
           />
         </div>
 
